@@ -76,6 +76,20 @@ app.post('/api/persons', (request, response) => {
     response.json(person)
 })
 
+const requestLogger = (request, response, next) => {
+    console.log('Method:', request.method)
+    console.log('Path:', request.path)
+    console.log('Body:', request.body)
+    console.log('---')
+    next()
+}
+
+app.use(requestLogger)
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send(P)
+}
+
 const PORT = 3001
 app.listen(PORT)
 console.log(`Server is running on port ${PORT}`)
