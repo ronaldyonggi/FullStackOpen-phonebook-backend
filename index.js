@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 app.use(express.json())
+app.use(express.static('build'))
 // app.use(morgan(function (tokens, req, res) {
 //     return [
 //         tokens.method(req, res),
