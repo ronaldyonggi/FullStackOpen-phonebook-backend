@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const morgan = require('morgan')
+// const morgan = require('morgan')
 app.use(express.json())
 app.use(express.static('build'))
 // app.use(morgan(function (tokens, req, res) {
@@ -14,8 +14,8 @@ app.use(express.static('build'))
 //         tokens.res(req, res, 'body')
 //     ].join(' ')
 // }))
-morgan.token('body', (req, res) => JSON.stringify(req.body));
-app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'));
+// morgan.token('body', (req, res) => JSON.stringify(req.body));
+// app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'));
 
 let persons = [
     { 
@@ -40,9 +40,9 @@ let persons = [
     }
 ]
 
-// app.get('/', (req, res) => {
-//     res.send('<h1>Hello World!</h1>')
-// })
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World!</h1>')
+})
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
