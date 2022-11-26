@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const app = require('cors')
 // const morgan = require('morgan')
-app.use(express.json())
-app.use(express.static('build'))
 // app.use(morgan(function (tokens, req, res) {
 //     return [
 //         tokens.method(req, res),
@@ -40,6 +38,10 @@ let persons = [
       "number": "39-23-6423122"
     }
 ]
+
+app.use(express.json())
+app.use(cors())
+app.use(express.static('build'))
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>')
