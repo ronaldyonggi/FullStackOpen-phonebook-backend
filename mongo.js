@@ -9,8 +9,6 @@ const password = process.argv[2]
 const personName = process.argv[3]
 const personNumber = process.argv[4]
 
-const url = `mongodb+srv://fullstack:${password}@cluster0.roigez4.mongodb.net/phonebook?retryWrites=true&w=majority`
-
 const personSchema = new mongoose.Schema({
     name: String,
     number: String
