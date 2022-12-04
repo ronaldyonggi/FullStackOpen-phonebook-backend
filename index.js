@@ -58,7 +58,8 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-    let count = persons.length
+    // let count = persons.length
+    let count = Person.length
     let currentDate = new Date()
     response.send(`
     <div>
