@@ -4,19 +4,6 @@ const app = express()
 const cors = require('cors')
 const Person = require('./models/person')
 const morgan = require('morgan')
-app.use(morgan(function (tokens, req, res) {
-    return [
-        tokens.method(req, res),
-        tokens.url(req, res),
-        tokens.status(req, res),
-        tokens.res(req, res, 'content-length'), 
-        '-',
-        tokens['response-time'](req, res), 'ms',
-        tokens.res(req, res, 'body')
-    ].join(' ')
-}))
-morgan.token('body', (req, res) => JSON.stringify(req.body));
-app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'));
 
 // let persons = [
 //     { 
@@ -41,9 +28,23 @@ app.use(morgan(':method :url :status :req[content-length] - :response-time ms :b
 //     }
 // ]
 
+app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
-app.use(express.static('build'))
+
+app.use(morgan(function (tokens, req, res) {
+    return [
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        tokens.res(req, res, 'content-length'), 
+        '-',
+        tokens['response-time'](req, res), 'ms',
+        tokens.res(req, res, 'body')
+    ].join(' ')
+}))
+morgan.token('body', (req, res) => JSON.stringify(req.body));
+app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'));
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>')
